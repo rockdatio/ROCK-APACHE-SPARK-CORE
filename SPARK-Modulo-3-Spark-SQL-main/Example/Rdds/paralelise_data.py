@@ -1,25 +1,25 @@
-from pyspark import RDD
+import time
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count, isnan, isnull, unix_timestamp, when, bround, avg, min, max, sum, udf
-from pyspark.sql.types import TimestampType, DecimalType, StringType
-
 
 if __name__ == '__main__':
     # ==========================
     # 1.- Starting spark session
     # ==========================
-
-    # spark = SparkSession.builder.master("local[1]").appName('Examples').config('spark.jars.packages','org.apache.spark:spark-avro_2.12:3.1.2').getOrCreate()
     spark = SparkSession.builder.appName('Examples').getOrCreate()
     sc = spark.sparkContext
+
+    ## Cluster 4 nodos y 2 cores = 8 partitions
+    # 1 tb => 128 gb de datos por Paritición
 
     data = [1, 2, 3, 4, 5]
     distData = sc.parallelize(data, 180)
     print(distData.getNumPartitions())
 
+    # 1 nodo y 2 cores => 2 Partions
     data2 = [1, 2, 3, 4, 5]
-    dist_data2 = sc.parallelize(data)
+    dist_data2 = sc.parallelize(data2)
     print(dist_data2.getNumPartitions())
+    time.sleep(120)
 
     distFile = sc.textFile("/tmp/data/workspace/Data - Laboratorio/diabetes.cvs")
 
