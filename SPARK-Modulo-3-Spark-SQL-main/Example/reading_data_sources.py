@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-import avro.schema
+#import avro.schema
 
 if __name__ == '__main__':
     new_path = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"

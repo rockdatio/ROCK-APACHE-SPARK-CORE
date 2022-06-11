@@ -1,5 +1,5 @@
 #pyspark==2.4.1
 #avro==1.11.0
 avro==1.10.2
-requests==2.18.4
+#requests==2.18.4
 #pyspark-stubs==3.0.0.post3
