@@ -133,7 +133,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+data/
+conf/
 # Spyder project settings
 .spyderproject
 .spyproject
