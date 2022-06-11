@@ -1,13 +1,11 @@
-import time
-
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count, isnan, when, unix_timestamp, from_unixtime
-from pyspark.sql.types import TimestampType, DecimalType, StringType
+from pyspark.sql.functions import col, unix_timestamp, from_unixtime
+from pyspark.sql.types import TimestampType, DecimalType
 
 if __name__ == '__main__':
     data = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"
 
-    spark = SparkSession.builder.appName('TIME').getOrCreate()
+    spark = SparkSession.builder.appName('TIMEANDCASTING').getOrCreate()
     # spark.conf.set("spark.sql.session.timeZone", 'America/Los_Angeles')1654979862
     spark.conf.set("spark.sql.session.timeZone", 'Asia/Hong_Kong')  # 1654979973
 
