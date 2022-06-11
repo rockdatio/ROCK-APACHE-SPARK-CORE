@@ -1,10 +1,11 @@
 from pyspark.sql import SparkSession
+from pyspark.conf import SparkConf
 #import avro.schema
 
 if __name__ == '__main__':
-    new_path = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"
     spark = SparkSession.builder.appName('Examples').getOrCreate()
-        # .config('spark.jars', 'com.databricks:spark-avro_2.11:2.0.1') \
+    new_path = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"
+    sc = spark.sparkContext
     spark.read.format("csv").option("header", "true").load(new_path)
 
     new_path1 = "/tmp/data/workspace/Data - Laboratorio/zipcodes.csv"
