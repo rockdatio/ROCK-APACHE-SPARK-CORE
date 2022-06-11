@@ -2,7 +2,6 @@ from pyspark.sql import SparkSession
 import avro.schema
 
 if __name__ == '__main__':
-    # new_path = "/tmp/data/workspace/Data - Laboratorio/REALTIME_ADEL_SUELDO_ORIGINAL.TXT"
     new_path = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"
     spark = SparkSession.builder.appName('Examples').getOrCreate()
         # .config('spark.jars', 'com.databricks:spark-avro_2.11:2.0.1') \
