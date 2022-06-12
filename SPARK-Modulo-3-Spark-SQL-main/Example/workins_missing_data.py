@@ -1,7 +1,7 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count, isnan, isnull, unix_timestamp, when, bround, avg, min, max, sum, udf
-from pyspark.sql.types import TimestampType, DecimalType, StringType
 import time
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, count, isnan, when
 
 if __name__ == '__main__':
     data = "/tmp/data/workspace/Data - Laboratorio/ExportCSV.csv"
@@ -44,30 +44,21 @@ if __name__ == '__main__':
     df_with_nulls.select([count(when(isnan(column) | col(column).isNull(), column)).alias(column) for column in
                           df_with_nulls.columns]).show()
 
-    # df_cleaned = df_with_nulls.filter(
-    #     (col("First Name").isNotNull() | ~ isnan("First Name")) &
-    #     (col("Last Name").isNotNull() | ~ isnan("Last Name")) &
-    #     (col("State").isNotNull() | ~ isnan("State")) &
-    #     (col("Purchase (USD)").isNotNull() | ~ isnan("Purchase (USD)")) &
-    #     (col("Date").isNotNull() | ~ isnan("Date")) &
-    #     (col("Retail Department").isNotNull() | ~ isnan("Retail Department")) &
-    #     (col("SSN").isNotNull()) | ~ isnan("SSN"))
     df_cleaned = df_with_nulls.filter(
-        (col("First Name").isNotNull()) &
-        (col("Last Name").isNotNull()) &
-        (col("State").isNotNull()) &
-        (col("Purchase (USD)").isNotNull()) &
-        (col("Date").isNotNull()) &
-        (col("Retail Department").isNotNull()) &
+        (col("First Name").isNotNull()) |
+        (col("Last Name").isNotNull()) |
+        (col("State").isNotNull()) |
+        (col("Purchase (USD)").isNotNull()) |
+        (col("Date").isNotNull()) |
+        (col("Retail Department").isNotNull()) |
         (col("SSN").isNotNull()))
-    df_cleaned.show(1000)
 
     print("=============================================")
-    print(df_cleaned.count())  # 8972
-    # 8165
+    print(df_cleaned.count())  # 8972 - 269
+    # 8703
     print("=============================================")
 
-    df_final = df_cleaned.na.drop('all')
+    df_final = df_cleaned.na.drop()
 
     df_final.select([count(when(isnan(column) | col(column).isNull(), column)).alias(column) for column in
                      df_final.columns]).show()
@@ -75,5 +66,5 @@ if __name__ == '__main__':
     print(df_final.count())  # 8165
     # expected 8703
     print("=============================================")
-    time.sleep(120)
+    # time.sleep(120)
     spark.stop()

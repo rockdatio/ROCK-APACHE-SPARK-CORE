@@ -1,3 +1,22 @@
+http://localhost:4040/executors/
+
+Developing in PYCHARM
+SET IN YOUR PYTHON PROJECT WORKSPACE
+python -m venv venv
+venv\Scripts\activate
+turning off
+venv\Scripts\deactivate
+
+mkdir workspace
+cd workspace
+# copiar compose file del proyecto
+docker compose up
+docker exec -it 51515 bashc
+# clonar el proyecto en la ruta: /tmp/data/workspace
+git clone ******
+cd \ROCK-APACHE-SPARK-CORE
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 # spark-submit --master spark://master:7077 paralelise_data.py
+# spark-submit --verbose --packages org.apache.spark:spark-avro_2.11:2.4.1,org.apache.avro:avro:1.8.2 --master spark://master:7077 SPARK-Modulo-3-Spark-SQL-main/Example/reading_data_sources.py
+spark-submit --master spark://master:7077 SPARK-Modulo-3-Spark-SQL-main/Example/
