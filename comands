@@ -1,12 +1,14 @@
 http://localhost:4040/executors/
 
 Developing in PYCHARM
+Create directory : docker-spark
+
 SET IN YOUR PYTHON PROJECT WORKSPACE
 python -m venv venv
 venv\Scripts\activate
+pip install -r requirements.txt
 turning off
 venv\Scripts\deactivate
-
 mkdir workspace
 cd workspace
 # copiar compose file del proyecto
