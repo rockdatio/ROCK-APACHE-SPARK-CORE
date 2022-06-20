@@ -19,6 +19,28 @@ git clone ******
 cd \ROCK-APACHE-SPARK-CORE
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-# spark-submit --master spark://master:7077 paralelise_data.py
-# spark-submit --verbose --packages org.apache.spark:spark-avro_2.11:2.4.1,org.apache.avro:avro:1.8.2 --master spark://master:7077 SPARK-Modulo-3-Spark-SQL-main/Example/reading_data_sources.py
+spark-submit --master spark://master:7077 paralelise_data.py
+spark-submit --verbose --packages org.apache.spark:spark-avro_2.11:2.4.1,org.apache.avro:avro:1.8.2 --master spark://master:7077 SPARK-Modulo-3-Spark-SQL-main/Example/reading_data_sources.py
 spark-submit --master spark://master:7077 SPARK-Modulo-3-Spark-SQL-main/Example/
+
+# STREAMING
+zookeeper-server-start.bat c:\zookeeper.properties
+kafka-server-start.bat c:\server.properties
+kafka-topics.bat --zookeeper localhost:2181 --topic retail-data --create --replication-factor 1 --partitions 1
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic retail-data --group te
+SPARK-Modulo-5-Spark-Streaming\RetailStream>python retail_simulation.py
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic retail-data --group tes
+kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group tes
+
+# JSON TOPIC TEST
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic json-topic
+#message example
+kafka-console-producer.bat --broker-list localhost:9092 --topic json-topic
+{"card_number":"d17fc3af1be5fd3b751eca72a34281d05c786428410322ed5fdab0bf8d14803d","action_reason":"051","decoded_date":"2020-07-23 20:48:56.831","masked_product_number":"455788******1116"}
+
+
+
+
+kafka-consumer-groups.bat --bootstrap-server localhost:9092 -list
+kafka-consumer-groups.bat -bootstrap-server localhost:9092 -describe group processor-applications
+

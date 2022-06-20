@@ -1,5 +1,4 @@
 import time
-
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, count, isnan, when
 
@@ -8,11 +7,11 @@ if __name__ == '__main__':
     spark = SparkSession.builder.appName('Examples').getOrCreate()
     df_with_nulls = spark.read.format("csv").option("header", "true").load(data)
     print(df_with_nulls.count())  # 8972
-    # for column in df_with_nulls.columns:
-    #     df_with_nulls.select(
-    #         count(
-    #             when(isnan(column) | col(column).isNull(), column)
-    #         ).alias(column)).show()
+    for column in df_with_nulls.columns:
+        df_with_nulls.select(
+            count(
+                when(isnan(column) | col(column).isNull(), column)
+            ).alias(column)).show()
     print("=============================================")
     # for column in df_with_nulls.columns:
     #     if column != "ID":
@@ -38,7 +37,7 @@ if __name__ == '__main__':
     print(df_to_drop.count())  # 269
     print("=============================================")
 
-    df_to_drop.write.mode('overwrite').parquet('/tmp/data/hadoop/landing/wrongRecords')
+    df_to_drop.write.mode('overwrite').parquet('/tmp/data/hadoop/landing/wrongRecordsTransactions')
     print("=============================================")
 
     df_with_nulls.select([count(when(isnan(column) | col(column).isNull(), column)).alias(column) for column in
@@ -57,6 +56,7 @@ if __name__ == '__main__':
     print(df_cleaned.count())  # 8972 - 269
     # 8703
     print("=============================================")
+    # REGLAS DE INPUTACIÓN
 
     df_final = df_cleaned.na.drop()
 
@@ -66,5 +66,5 @@ if __name__ == '__main__':
     print(df_final.count())  # 8165
     # expected 8703
     print("=============================================")
-    # time.sleep(120)
+    # # time.sleep(120)
     spark.stop()

@@ -44,18 +44,4 @@ if __name__ == '__main__':
     # SELECT EXPRESION
     df = df_cleaned.withColumn("Date", unix_timestamp(col("Date"), "M/d/yyyy h:mm a").cast(TimestampType()))
 
-    # in which trimester, is the month placed ?
-    df_cleaned2 = df.selectExpr("*",  # Select what columns you would like to show
-                                "case "
-                                "when (MONTH(Date)<=4 and MONTH(Date)>=1) then concat(YEAR(Date),'Q1')"
-                                " when (MONTH(Date)<=8 and MONTH(Date)>=5) then concat(YEAR(Date),'Q2') "
-                                "when (MONTH(Date)<=12 and MONTH(Date)>=9) then concat(YEAR(Date),'Q3') "
-                                "ELSE concat(YEAR(Date),'BAD') "
-                                "end AS trimester")
-
-    df.selectExpr("*", "Date", "State").show()
-    # Select with expr
-    df.select(col("Date"), col("ID"), expr("add_months(to_date(Date,'yyyy-MM-dd'), 2)").alias("adding_months")).show()
-
-    df_cleaned2.show()
     spark.stop()

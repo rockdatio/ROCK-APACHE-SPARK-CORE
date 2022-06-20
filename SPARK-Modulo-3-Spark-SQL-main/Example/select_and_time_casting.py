@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, unix_timestamp, from_unixtime
+from pyspark.sql.functions import col, unix_timestamp, from_unixtime, month, year
 from pyspark.sql.types import TimestampType, DecimalType
 
 if __name__ == '__main__':
@@ -24,8 +24,8 @@ if __name__ == '__main__':
     print("=============================================")
 
     # Casting Directly
-    df_cleaned \
-        .select(col("Date").cast(TimestampType())).withColumn("now", unix_timestamp(format='M/d/yyyy')).show()
+    # df_cleaned \
+    #     .select(col("Date").cast(TimestampType())).withColumn("now", unix_timestamp(format='M/d/yyyy')).show()
 
     # Using unix_timestamp functions
     df_without_casting = df_cleaned \

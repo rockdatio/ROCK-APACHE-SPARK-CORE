@@ -1,3 +1,4 @@
+import time
 from pyspark.sql import SparkSession
 from pyspark.conf import SparkConf
 #import avro.schema
@@ -17,6 +18,7 @@ if __name__ == '__main__':
     spark.read.format("json").load(new_path2).show(20)
     spark.read.format("parquet").load(new_path4).show(20)
     # IMPLICIT FORM
+    time.sleep(120)
     spark.read.format("avro").load(new_path3).show(20)
 
     # EXPLICIT FORM
