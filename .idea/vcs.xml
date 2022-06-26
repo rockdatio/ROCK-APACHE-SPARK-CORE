@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/SPARK-Modulo-5-Spark-Streaming" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SPARK-Modulo-6-Spark-ML" vcs="Git" />
   </component>
 </project>

@@ -1,8 +1,8 @@
 #pyspark==2.4.1
 #avro==1.11.0
 avro==1.10.2
-pyspark-stubs==3.0.0.post3
+#pyspark-stubs==3.0.0.post3
 kafka-python
 Faker
 pandas
-googletrans==3.1.0a0
+numpy
